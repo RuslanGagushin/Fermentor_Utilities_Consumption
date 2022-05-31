@@ -14,3 +14,5 @@ class Fermentor:
         self.m_nerj = 2 * v_poln
         self.m_prod = self.v_rab * RO_PROD
         self.m_jack = 0.25 * v_poln
+       
+    # LOOOOOOOL
