@@ -1,2 +1,3 @@
+from energy import Fermentor
 
-# TODO расчет тепло-энергетичесих характеристик
+fermenter = Fermentor(100)
