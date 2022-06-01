@@ -2,24 +2,80 @@ import tkinter
 from energy import Fermentor
 from tubes import Tubes
 
+
 def input_mass():
-    titles = [
-        "Введите принятное значение рахода воды (кг/час): ",
-        "Введите принятное значение рахода тех. пара (кг/час): ",
-        "Введите принятное значение рахода чистого пара (кг/час): ",
-        "Введите принятное значение рахода продукта (кг/час): ",
-        "Введите принятное значение воздуха (м3/час): "
-    ]
 
     line = tkinter.Label(root, text='-----')
     line.grid(column=0, row=10, columnspan=2, padx=5, pady=5)
+    # Вопрос 1
+    question1 = tkinter.Label(root, text="Введите принятное значение рахода воды (кг/час): ")
+    question1.grid(column=0, row=12, columnspan=2, padx=5, pady=5, sticky='w')
 
-    for i in range(5):
-        question = tkinter.Label(root, text=titles[i])
-        question.grid(column=0, row=i + 11, columnspan=2, padx=5, pady=5, sticky='w')
+    input_char1 = tkinter.Entry(root)
+    input_char1.grid(column=2, row=12, padx=15, pady=5, sticky="e")
+    # Вопрос 2
+    question2 = tkinter.Label(root, text="Введите принятное значение рахода тех. пара (кг/час): ")
+    question2.grid(column=0, row=13, columnspan=2, padx=5, pady=5, sticky='w')
 
-        input_char = tkinter.Entry(root)
-        input_char.grid(column=2, row=i + 11, padx=15, pady=5, sticky="e")
+    input_char2 = tkinter.Entry(root)
+    input_char2.grid(column=2, row=13, padx=15, pady=5, sticky="e")
+
+    # Вопрос 3
+    question3 = tkinter.Label(root, text="Введите принятное значение рахода чистого пара (кг/час): ")
+    question3.grid(column=0, row=14, columnspan=2, padx=5, pady=5, sticky='w')
+
+    input_char3 = tkinter.Entry(root)
+    input_char3.grid(column=2, row=14, padx=15, pady=5, sticky="e")
+
+    # Вопрос 4
+    question4 = tkinter.Label(root, text="Введите принятное значение рахода продукта (кг/час): ")
+    question4.grid(column=0, row=15, columnspan=2, padx=5, pady=5, sticky='w')
+
+    input_char4 = tkinter.Entry(root)
+    input_char4.grid(column=2, row=15, padx=15, pady=5, sticky="e")
+
+    # Вопрос 5
+    question5 = tkinter.Label(root, text="Введите принятное значение расхода воздуха (м3/час): ")
+    question5.grid(column=0, row=16, columnspan=2, padx=5, pady=5, sticky='w')
+
+    input_char5 = tkinter.Entry(root)
+    input_char5.grid(column=2, row=16, padx=15, pady=5, sticky="e")
+
+    def tubes():
+        tube = Tubes(g_water=float(input_char1.get()),
+                     g_p_steam=float(input_char2.get()),
+                     g_c_steam=float(input_char3.get()),
+                     g_prod=float(input_char4.get()),
+                     g_air=float(input_char5.get()))
+
+        d_up = tkinter.Label(root, text="-----")
+        d_up.grid(column=0, row=17, columnspan=2, padx=5, pady=5, sticky='w')
+
+        d_down = tkinter.Label(root, text="Расчетные диаметры трубопроводов:")
+        d_down.grid(column=0, row=18, columnspan=2, padx=5, pady=5, sticky='w')
+
+        d_1 = tkinter.Label(root, text=f"Вода: [{tube.d_water()}] мм ")
+        d_1.grid(column=0, row=19, columnspan=2, padx=5, pady=5, sticky='w')
+
+        d_2 = tkinter.Label(root, text=f"Технический пар: [{tube.d_p_steam()}] мм ")
+        d_2.grid(column=0, row=20, columnspan=2, padx=5, pady=5, sticky='w')
+
+        d_3 = tkinter.Label(root, text=f"Чистый пар: [{tube.d_c_steam()}] мм ")
+        d_3.grid(column=0, row=21, columnspan=2, padx=5, pady=5, sticky='w')
+
+        d_4 = tkinter.Label(root, text=f"Продукт: [{tube.d_prod()}] мм ")
+        d_4.grid(column=0, row=22, columnspan=2, padx=5, pady=5, sticky='w')
+
+        d_5 = tkinter.Label(root, text=f"Воздух: [{tube.d_air()}] мм ")
+        d_5.grid(column=0, row=22, columnspan=2, padx=5, pady=5, sticky='w')
+
+
+
+    #Создание кнопки
+    # Кнопка запуска расчета
+    btn_tube = tkinter.Button(root, text="Расчет", command=tubes)  # функция указывается без вызова
+    btn_tube.grid(column=1, row=17, padx=5, pady=5)
+
 
 def calculate():
     fermenter = Fermentor(int(input_txt.get()))
@@ -48,13 +104,12 @@ def calculate():
         char = tkinter.Label(root, text=titles[i], anchor='nw', justify="right")
         char.grid(column=0, row=i + 2, columnspan=2, sticky="w", padx=5, pady=5)
 
-
     input_mass()
 
 # create main screen
 root = tkinter.Tk()
 root.title("Расчет характеристик оборудования Biotechno")
-root.geometry("700x600")
+root.geometry("700x800")
 
 # Наименование ввода значения
 input_title = tkinter.Label(root, text="Введите объем сосуда в литрах")
@@ -68,21 +123,5 @@ input_txt.grid(column=0, row=1, padx=5, pady=5)
 btn_input = tkinter.Button(root, text="Расчет", command=calculate)  # функция указывается без вызова
 btn_input.grid(column=1, row=1, padx=5, pady=5)
 
-'''
-g_water = int(input("Введите принятное значение рахода воды (кг/час): "))
-g_p_steam = int(input("Введите принятное значение рахода тех. пара (кг/час): "))
-g_c_steam = int(input("Введите принятное значение рахода чистого пара (кг/час): "))
-g_prod = int(input("Введите принятное значение рахода продукта (кг/час): "))
-g_air = int(input("Введите принятное значение воздуха (м3/час): "))
-
-tube = Tubes(g_water, g_p_steam, g_c_steam, g_prod, g_air)
-
-print("Диаметры труб, мм:")
-print(f"Вода: {tube.d_water()} мм:")
-print(f"Технический пар: {tube.d_p_steam()} мм:")
-print(f"Чистый пар: {tube.d_c_steam()} мм:")
-print(f"Продукт: {tube.d_prod()} мм:")
-print(f"Воздух: {tube.d_air()} мм:")
-'''
 
 root.mainloop()
