@@ -83,28 +83,28 @@ class Fermentor:
 
     def g_steam_fsip_ps(self):
         """массовый расход технического пара полная стерилизация, кг/час"""
-        return 1.2 * (self.m_para_fsip_ps() / 0.5)
+        return round(1.2 * (self.m_para_fsip_ps() / 0.5), 2)
 
     def g_steam_esip_cs(self):
         """массовый расход чистого пара пустая стерилизация, кг/час"""
-        return 1.2 * (self.m_para_esip_cs() / 0.5)
+        return round(1.2 * (self.m_para_esip_cs() / 0.5), 2)
 
     def g_steam_tcm_ps(self):
         """массовый расход технического пара на нагрев рубашки и емкости, кг/час"""
-        return 1.2 * (self.m_para_esip_cs() / 0.5)
+        return round(1.2 * (self.m_para_esip_cs() / 0.5), 2)
 
     def g_water_fcip(self):
         """массовый расход воды на захолаживание после полной стерилизации, кг/час"""
-        return 1.2 * (self.m_water_fsip() / 0.67)
+        return round(1.2 * (self.m_water_fsip() / 0.67), 2)
 
     def g_water_tcm(self):
         """массовый расход воды на захолаживание, кг/час"""
-        return 1.2 * (self.m_water_tcm() / 0.25)
+        return round(1.2 * (self.m_water_tcm() / 0.25), 2)
 
     def g_prod(self):
         """массовый расход продукта, кг/час"""
-        return 1.2 * (self.m_prod / 0.5)
+        return round(1.2 * (self.m_prod / 0.5), 2)
 
     def g_air(self):
         """массовый расход воздуха, кг/час"""
-        return 2 * self.v_poln * 60 / 1000
+        return round(2 * self.v_poln * 60 / 1000, 2)
