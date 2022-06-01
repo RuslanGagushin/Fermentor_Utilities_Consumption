@@ -8,27 +8,27 @@ def input_mass():
     line = tkinter.Label(root, text='-----')
     line.grid(column=0, row=10, columnspan=2, padx=5, pady=5)
     # Вопрос 1
-    question1 = tkinter.Label(root, text="Введите принятное значение рахода воды (кг/час): ")
+    question1 = tkinter.Label(root, text="Введите принятное значение расхода воды (кг/час): ")
     question1.grid(column=0, row=12, columnspan=2, padx=5, pady=5, sticky='w')
 
     input_char1 = tkinter.Entry(root)
     input_char1.grid(column=2, row=12, padx=15, pady=5, sticky="e")
     # Вопрос 2
-    question2 = tkinter.Label(root, text="Введите принятное значение рахода тех. пара (кг/час): ")
+    question2 = tkinter.Label(root, text="Введите принятное значение расхода тех. пара (кг/час): ")
     question2.grid(column=0, row=13, columnspan=2, padx=5, pady=5, sticky='w')
 
     input_char2 = tkinter.Entry(root)
     input_char2.grid(column=2, row=13, padx=15, pady=5, sticky="e")
 
     # Вопрос 3
-    question3 = tkinter.Label(root, text="Введите принятное значение рахода чистого пара (кг/час): ")
+    question3 = tkinter.Label(root, text="Введите принятное значение расхода чистого пара (кг/час): ")
     question3.grid(column=0, row=14, columnspan=2, padx=5, pady=5, sticky='w')
 
     input_char3 = tkinter.Entry(root)
     input_char3.grid(column=2, row=14, padx=15, pady=5, sticky="e")
 
     # Вопрос 4
-    question4 = tkinter.Label(root, text="Введите принятное значение рахода продукта (кг/час): ")
+    question4 = tkinter.Label(root, text="Введите принятное значение расхода продукта (кг/час): ")
     question4.grid(column=0, row=15, columnspan=2, padx=5, pady=5, sticky='w')
 
     input_char4 = tkinter.Entry(root)
