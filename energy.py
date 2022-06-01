@@ -36,7 +36,46 @@ class Fermentor:
         self.m_prod = self.v_rab * RO_PROD
         self.m_jack = 0.25 * v_poln
 
-    def q_nagrev_fcip_ps(self):
-        """teplota na nagrev full vessel with empty jacket by PS 15->121*C"""
+    # fsip - полная стерилизация / esip - пустая
+    # ps - технический пар / cs - чистый пар
+
+    def q_nagrev_fsip_ps(self):
+        """теплота на нагрев полной емкости с пустой рубашкой, техническим паром 15->121*C"""
         return C_PROD * self.m_prod * (T_STER - T_PROD) + C_SS * self.m_nerj * (T_STER - T_PROD)
+
+    def q_nagrev_esip_cs(self):
+        """теплота на нагрев пустой емкости с пустой рубашкой, чистым паром 15->121*C"""
+        return C_SS * self.m_nerj * (T_STER - T_PROD)
+
+    def q_nagrev_tcm_ps(self):
+        """теплота на нагрев полной емкости с полной рубашкой рубашкой, техническим паром 20->37*C"""
+        return C_PROD * (self.m_jack + self.m_prod) * (37 - 20) + C_SS * self.m_nerj * (37 - 20)
+
+    def q_hold_fsip_ps(self):
+        """теплота на выдержку 45 минут, технический пар"""
+        return 0.25 * self.q_nagrev_fsip_ps()
+
+    def q_hold_esip_cs(self):
+        """теплота на выдержка 45 минут, чистый пар"""
+        return 0.5 * self.q_nagrev_esip_cs()
+
+    def m_para_fsip_ps(self):
+        """масса необходимого технического пара, кг"""
+        return self.q_nagrev_fsip_ps() / R_STEAM
+
+    def m_para_esip_cs(self):
+        """масса необходимого чистого пара, кг"""
+        return 2 * self.q_nagrev_esip_cs() / R_STEAM
+
+    def m_para_tcm_ps(self):
+        """масса необходимого технического пара на нагрев рубашки, кг"""
+        return self.q_nagrev_tcm_ps() / R_STEAM
+
+    def m_water_fsip(self):
+        """масса воды на захолаживание пустой емкости с полной рубашкой 121->30*C, кг"""
+        return (4 * self.q_nagrev_fsip_ps()) / (C_WATER * (T_STER - T_WATER))
+
+    def m_water_tcm(self):
+        """масса воды на захолаживание полной емкости с полной рубашкой 37->20*C, кг"""
+        return (2 * self.q_nagrev_tcm_ps()) / (C_WATER * (37 - T_WATER))
 
