@@ -1,10 +1,10 @@
 import tkinter
-from energy import Fermentor
 from tubes import Tubes
+from mass_flow_calc import MassFlowCalc
 
 
 def input_mass():
-
+    """Получение данных о принятых значениях расхода от пользователя"""
     line = tkinter.Label(root, text='-----')
     line.grid(column=0, row=10, columnspan=2, padx=5, pady=5)
     # Вопрос 1
@@ -13,6 +13,7 @@ def input_mass():
 
     input_char1 = tkinter.Entry(root)
     input_char1.grid(column=2, row=12, padx=15, pady=5, sticky="e")
+
     # Вопрос 2
     question2 = tkinter.Label(root, text="Введите принятное значение расхода тех. пара (кг/час): ")
     question2.grid(column=0, row=13, columnspan=2, padx=5, pady=5, sticky='w')
@@ -69,42 +70,17 @@ def input_mass():
         d_5 = tkinter.Label(root, text=f"Воздух: [{tube.d_air()}] мм ")
         d_5.grid(column=0, row=22, columnspan=2, padx=5, pady=5, sticky='w')
 
-
-
-    #Создание кнопки
+    # Создание кнопки
     # Кнопка запуска расчета
     btn_tube = tkinter.Button(root, text="Расчет", command=tubes)  # функция указывается без вызова
     btn_tube.grid(column=1, row=17, padx=5, pady=5)
 
 
 def calculate():
-    fermenter = Fermentor(int(input_txt.get()))
-
-    chars = [":",
-             fermenter.g_steam_fsip_ps(),
-             fermenter.g_steam_esip_cs(),
-             fermenter.g_steam_tcm_ps(),
-             fermenter.g_water_fcip(),
-             fermenter.g_water_tcm(),
-             fermenter.g_prod(),
-             fermenter.g_air()]
-
-    titles = [
-        f"Расчетные массовые расходы сред {chars[0]} ",
-        f"1. Технический пар на полную стерилизацию: [{chars[1]}] кг/час",
-        f"2. Чистый пар на пустую стерилизацию: [{chars[2]}] кг/час",
-        f"3. Технический пар на подогрев продукта [{chars[3]}] кг/час",
-        f"4. Вода на захолаживание после полной стерилизации: [{chars[4]}] кг/час",
-        f"5. Вода на захолаживание после пустой стерилизации [{chars[5]}] кг/час",
-        f"6. Выход продукта: [{chars[6]}] кг/час",
-        f"7. Воздух: [{chars[7]}] м3/час"
-    ]
-
-    for i in range(8):
-        char = tkinter.Label(root, text=titles[i], anchor='nw', justify="right")
-        char.grid(column=0, row=i + 2, columnspan=2, sticky="w", padx=5, pady=5)
-
+    mfc = MassFlowCalc(int(input_txt.get()), root)
+    mfc.print_results()
     input_mass()
+
 
 # create main screen
 root = tkinter.Tk()
@@ -122,6 +98,5 @@ input_txt.grid(column=0, row=1, padx=5, pady=5)
 # Кнопка запуска расчета
 btn_input = tkinter.Button(root, text="Расчет", command=calculate)  # функция указывается без вызова
 btn_input.grid(column=1, row=1, padx=5, pady=5)
-
 
 root.mainloop()
