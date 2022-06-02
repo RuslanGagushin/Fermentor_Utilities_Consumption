@@ -2,14 +2,13 @@ from energy import Fermentor
 import tkinter
 
 
-
 class MassFlowCalc(Fermentor):
     def __init__(self, v_poln, root):
         super().__init__(v_poln)
         self.root = root
 
     def results(self):
-        '''Возвращает список расходов для каждой среды '''
+        """Возвращает список расходов для каждой среды """
         return [
             ":",
             self.g_steam_fsip_ps(),
