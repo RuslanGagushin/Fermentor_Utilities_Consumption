@@ -5,7 +5,7 @@ from tube_calc import TubeCalc
 
 # Функция для расчета потребления сред и вывода результата на экран
 def calculate():
-    """Расчет массовых характеристик потребляемых сред"""
+    """Расчет массовых характеристик потребляемых сред и диаметров трубопроводов"""
     mfc = MassFlowCalc(int(input_txt.get()), root)
     mfc.print_results()
     tc = TubeCalc(root)
