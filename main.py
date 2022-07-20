@@ -30,3 +30,5 @@ btn_input = tkinter.Button(root, text="Расчет", command=calculate)  # фу
 btn_input.grid(column=1, row=1, padx=5, pady=5)
 
 root.mainloop()
+
+print "РЛАЛА"
